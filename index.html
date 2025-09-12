@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!-- Add dark class for default theme and theme switching -->
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,32 +13,53 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            /* Smooth transitions for color changes */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
     </style>
+    <script>
+        // Set theme on page load to prevent flashing
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        // Configure Tailwind for dark mode
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
 </head>
-<body class="bg-gray-900 text-gray-200">
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">
 
     <!-- Header & Navigation -->
-    <header class="bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
+    <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-200 dark:border-gray-800">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white">SPS</a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#about" class="hover:text-cyan-400 transition-colors duration-300">About</a>
-                <a href="#skills" class="hover:text-cyan-400 transition-colors duration-300">Skills</a>
-                <a href="#education" class="hover:text-cyan-400 transition-colors duration-300">Education</a>
-                <a href="#contact" class="hover:text-cyan-400 transition-colors duration-300">Contact</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-white">
-                <i data-lucide="menu"></i>
-            </button>
+            <a href="#" class="text-2xl font-bold text-gray-900 dark:text-white">SPS</a>
+            <div class="flex items-center space-x-8">
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300">About</a>
+                    <a href="#skills" class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300">Skills</a>
+                    <a href="#education" class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300">Education</a>
+                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300">Contact</a>
+                </nav>
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <i data-lucide="sun" class="hidden" id="theme-toggle-sun"></i>
+                    <i data-lucide="moon" id="theme-toggle-moon"></i>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 dark:text-white">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800">
             <nav class="flex flex-col items-center space-y-4 py-4">
-                <a href="#about" class="hover:text-cyan-400 transition-colors duration-300">About</a>
-                <a href="#skills" class="hover:text-cyan-400 transition-colors duration-300">Skills</a>
-                <a href="#education" class="hover:text-cyan-400 transition-colors duration-300">Education</a>
-                <a href="#contact" class="hover:text-cyan-400 transition-colors duration-300">Contact</a>
+                <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300">About</a>
+                <a href="#skills" class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300">Skills</a>
+                <a href="#education" class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300">Education</a>
+                <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300">Contact</a>
             </nav>
         </div>
     </header>
@@ -47,44 +69,42 @@
         <!-- Hero Section -->
         <section id="home" class="min-h-[80vh] flex flex-col md:flex-row items-center justify-center text-center md:text-left">
             <div class="md:w-1/2 space-y-4">
-                <span class="text-cyan-400 font-semibold">Hello, I'm</span>
-                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Surya Prakash Sharma</h1>
-                <h2 class="text-xl md:text-2xl text-gray-400">Computer Science Undergraduate</h2>
-                <p class="text-gray-300 max-w-lg mx-auto md:mx-0">
+                <span class="text-cyan-500 dark:text-cyan-400 font-semibold">Hello, I'm</span>
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">Surya Prakash Sharma</h1>
+                <h2 class="text-xl md:text-2xl text-gray-500 dark:text-gray-400">Computer Science Undergraduate</h2>
+                <p class="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0">
                     A passionate first-year student with a keen interest in Data Science and Machine Learning, dedicated to solving real-world challenges.
                 </p>
                 <div class="flex justify-center md:justify-start space-x-4 pt-4">
-                    <a href="#contact" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 px-6 rounded-lg transition-transform duration-300 hover:scale-105 shadow-lg shadow-cyan-500/20">
+                    <a href="#contact" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 px-6 rounded-lg transition-transform duration-300 hover:scale-105 shadow-lg shadow-cyan-500/30 dark:shadow-cyan-500/20">
                         Get In Touch
                     </a>
-                     <a href="https://www.linkedin.com/in/surya-prakash-sharma-329a122b7/" target="_blank" rel="noopener noreferrer" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-transform duration-300 hover:scale-105">
+                     <a href="https://www.linkedin.com/in/surya-prakash-sharma-329a122b7/" target="_blank" rel="noopener noreferrer" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-semibold py-3 px-6 rounded-lg transition-transform duration-300 hover:scale-105">
                         View LinkedIn
                     </a>
                 </div>
             </div>
              <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
-                 <!-- === THE CHANGE IS HERE === -->
-                 <!-- I've updated the src to "mypic.jpg" to match your file -->
-                 <img src="mypic.jpg" alt="Surya Prakash Sharma" class="w-64 h-64 md:w-80 md:h-80 object-cover bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full shadow-2xl shadow-cyan-500/20">
+                 <img src="mypic.jpg" alt="Surya Prakash Sharma" class="w-64 h-64 md:w-80 md:h-80 object-cover bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full shadow-2xl shadow-cyan-500/20">
              </div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12 text-white">About Me</h2>
-            <div class="flex flex-col md:flex-row items-center bg-gray-800/50 p-8 rounded-2xl shadow-lg">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center bg-gray-100 dark:bg-gray-800/50 p-8 rounded-2xl shadow-lg">
                 <div class="md:w-2/3 space-y-4">
-                    <h3 class="text-2xl font-semibold text-cyan-400">Driven by Curiosity and Innovation</h3>
-                    <p class="text-gray-300">
+                    <h3 class="text-2xl font-semibold text-cyan-600 dark:text-cyan-400">Driven by Curiosity and Innovation</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
                         I am a first-year Computer Science undergraduate at the University of Petroleum and Energy Studies, Dehradun. My academic journey is fueled by a profound interest in Data Science and Machine Learning.
                     </p>
-                    <p class="text-gray-300">
+                    <p class="text-gray-700 dark:text-gray-300">
                         I am committed to applying my developing knowledge to craft solutions for real-world problems and am actively seeking to connect with industry professionals. I'm excited about future internship opportunities where I can contribute, learn, and grow.
                     </p>
                 </div>
                 <div class="md:w-1/3 mt-8 md:mt-0 flex justify-center">
-                     <div class="w-48 h-48 bg-gray-700 rounded-lg flex items-center justify-center">
-                         <i data-lucide="brain-circuit" class="w-24 h-24 text-cyan-400"></i>
+                     <div class="w-48 h-48 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                         <i data-lucide="brain-circuit" class="w-24 h-24 text-cyan-500 dark:text-cyan-400"></i>
                      </div>
                 </div>
             </div>
@@ -92,57 +112,56 @@
 
         <!-- Skills Section -->
         <section id="skills" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12 text-white">My Skills</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">My Skills</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                <!-- Technical Skills -->
-                <div class="bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
-                    <i data-lucide="code-2" class="w-12 h-12 text-cyan-400 mx-auto mb-4"></i>
-                    <h3 class="text-xl font-semibold text-white">C Language</h3>
+                <!-- Skill Card -->
+                <div class="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
+                    <i data-lucide="code-2" class="w-12 h-12 text-cyan-500 dark:text-cyan-400 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">C Language</h3>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
-                    <i data-lucide="braces" class="w-12 h-12 text-cyan-400 mx-auto mb-4"></i>
-                    <h3 class="text-xl font-semibold text-white">Python</h3>
+                <div class="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
+                    <i data-lucide="braces" class="w-12 h-12 text-cyan-500 dark:text-cyan-400 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Python</h3>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
-                    <i data-lucide="github" class="w-12 h-12 text-cyan-400 mx-auto mb-4"></i>
-                    <h3 class="text-xl font-semibold text-white">GitHub</h3>
+                <div class="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
+                    <i data-lucide="github" class="w-12 h-12 text-cyan-500 dark:text-cyan-400 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">GitHub</h3>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
-                     <i data-lucide="file-spreadsheet" class="w-12 h-12 text-cyan-400 mx-auto mb-4"></i>
-                    <h3 class="text-xl font-semibold text-white">Excel</h3>
+                <div class="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
+                     <i data-lucide="file-spreadsheet" class="w-12 h-12 text-cyan-500 dark:text-cyan-400 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Excel</h3>
                 </div>
-                 <div class="bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
-                    <i data-lucide="presentation" class="w-12 h-12 text-cyan-400 mx-auto mb-4"></i>
-                    <h3 class="text-xl font-semibold text-white">PowerPoint</h3>
+                 <div class="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
+                    <i data-lucide="presentation" class="w-12 h-12 text-cyan-500 dark:text-cyan-400 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">PowerPoint</h3>
                 </div>
-                <!-- Soft Skills -->
-                <div class="bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
-                    <i data-lucide="users" class="w-12 h-12 text-cyan-400 mx-auto mb-4"></i>
-                    <h3 class="text-xl font-semibold text-white">Team Management</h3>
+                <div class="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
+                    <i data-lucide="users" class="w-12 h-12 text-cyan-500 dark:text-cyan-400 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Team Management</h3>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
-                    <i data-lucide="flag" class="w-12 h-12 text-cyan-400 mx-auto mb-4"></i>
-                    <h3 class="text-xl font-semibold text-white">Leadership</h3>
+                <div class="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
+                    <i data-lucide="flag" class="w-12 h-12 text-cyan-500 dark:text-cyan-400 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Leadership</h3>
                 </div>
-                <div class="bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
-                    <i data-lucide="share-2" class="w-12 h-12 text-cyan-400 mx-auto mb-4"></i>
-                    <h3 class="text-xl font-semibold text-white">Social Media</h3>
+                <div class="bg-gray-100 dark:bg-gray-800/50 p-6 rounded-2xl text-center hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
+                    <i data-lucide="share-2" class="w-12 h-12 text-cyan-500 dark:text-cyan-400 mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Social Media</h3>
                 </div>
             </div>
         </section>
 
         <!-- Education Section -->
         <section id="education" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12 text-white">Education</h2>
-            <div class="max-w-2xl mx-auto bg-gray-800/50 p-8 rounded-2xl shadow-lg">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Education</h2>
+            <div class="max-w-2xl mx-auto bg-gray-100 dark:bg-gray-800/50 p-8 rounded-2xl shadow-lg">
                 <div class="flex items-start space-x-6">
                      <div>
-                        <i data-lucide="graduation-cap" class="w-12 h-12 text-cyan-400"></i>
+                        <i data-lucide="graduation-cap" class="w-12 h-12 text-cyan-500 dark:text-cyan-400"></i>
                      </div>
                      <div>
-                        <p class="text-gray-400">2025 — 2029</p>
-                        <h3 class="text-xl font-semibold text-white mt-1">University of Petroleum and Energy Studies, Dehradun</h3>
-                        <p class="text-cyan-400 mt-1">Bachelor of Technology in Computer Science</p>
+                        <p class="text-gray-500 dark:text-gray-400">2025 — 2029</p>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mt-1">University of Petroleum and Energy Studies, Dehradun</h3>
+                        <p class="text-cyan-600 dark:text-cyan-400 mt-1">Bachelor of Technology in Computer Science</p>
                      </div>
                 </div>
             </div>
@@ -150,32 +169,32 @@
         
         <!-- Projects Section Placeholder -->
         <section id="projects" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12 text-white">Projects</h2>
-            <div class="text-center bg-gray-800/50 p-10 rounded-2xl">
-                <i data-lucide="construction" class="w-16 h-16 text-cyan-400 mx-auto mb-4"></i>
-                <h3 class="text-2xl font-semibold text-white">Coming Soon!</h3>
-                <p class="text-gray-400 mt-2">I'm currently working on exciting projects. Please check back later to see my work.</p>
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Projects</h2>
+            <div class="text-center bg-gray-100 dark:bg-gray-800/50 p-10 rounded-2xl">
+                <i data-lucide="construction" class="w-16 h-16 text-cyan-500 dark:text-cyan-400 mx-auto mb-4"></i>
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Coming Soon!</h3>
+                <p class="text-gray-500 dark:text-gray-400 mt-2">I'm currently working on exciting projects. Please check back later to see my work.</p>
             </div>
         </section>
 
         <!-- Contact Section -->
         <section id="contact" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-4 text-white">Get In Touch</h2>
-            <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gray-900 dark:text-white">Get In Touch</h2>
+            <p class="text-center text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
                 I'm open to connecting with industry professionals and exploring internship opportunities. Feel free to reach out!
             </p>
-            <div class="max-w-md mx-auto bg-gray-800/50 p-8 rounded-2xl shadow-lg space-y-6">
+            <div class="max-w-md mx-auto bg-gray-100 dark:bg-gray-800/50 p-8 rounded-2xl shadow-lg space-y-6">
                 <div class="flex items-center space-x-4">
-                    <i data-lucide="mail" class="w-6 h-6 text-cyan-400"></i>
-                    <a href="mailto:Surya.27399@stu.upes.ac.in" class="text-gray-300 hover:text-cyan-400 transition-colors">Surya.27399@stu.upes.ac.in</a>
+                    <i data-lucide="mail" class="w-6 h-6 text-cyan-500 dark:text-cyan-400"></i>
+                    <a href="mailto:Surya.27399@stu.upes.ac.in" class="text-gray-700 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">Surya.27399@stu.upes.ac.in</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <i data-lucide="phone" class="w-6 h-6 text-cyan-400"></i>
-                    <a href="tel:894917058" class="text-gray-300 hover:text-cyan-400 transition-colors">8949170558</a>
+                    <i data-lucide="phone" class="w-6 h-6 text-cyan-500 dark:text-cyan-400"></i>
+                    <a href="tel:894917058" class="text-gray-700 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">8949170558</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <i data-lucide="linkedin" class="w-6 h-6 text-cyan-400"></i>
-                    <a href="https://www.linkedin.com/in/surya-prakash-sharma-329a122b7/" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-cyan-400 transition-colors">LinkedIn Profile</a>
+                    <i data-lucide="linkedin" class="w-6 h-6 text-cyan-500 dark:text-cyan-400"></i>
+                    <a href="https://www.linkedin.com/in/surya-prakash-sharma-329a122b7/" target="_blank" rel="noopener noreferrer" class="text-gray-700 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors">LinkedIn Profile</a>
                 </div>
             </div>
         </section>
@@ -183,13 +202,43 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-800 mt-20">
-        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+    <footer class="border-t border-gray-200 dark:border-gray-800 mt-20">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500 dark:text-gray-500">
             <p>&copy; 2025 Surya Prakash Sharma. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script>
+        // Theme switcher logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleSunIcon = document.getElementById('theme-toggle-sun');
+        const themeToggleMoonIcon = document.getElementById('theme-toggle-moon');
+
+        // Function to set the theme
+        const setTheme = (isDark) => {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                themeToggleSunIcon.classList.remove('hidden');
+                themeToggleMoonIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeToggleSunIcon.classList.add('hidden');
+                themeToggleMoonIcon.classList.remove('hidden');
+                localStorage.setItem('theme', 'light');
+            }
+        };
+
+        // Check initial theme from localStorage and set it
+        const currentTheme = localStorage.getItem('theme');
+        setTheme(currentTheme === 'dark');
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            setTheme(!isDark);
+        });
+
+        // Lucide icons and mobile menu logic
         lucide.createIcons();
 
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -200,7 +249,6 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Close mobile menu when a link is clicked
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
@@ -209,5 +257,4 @@
     </script>
 </body>
 </html>
-
 
